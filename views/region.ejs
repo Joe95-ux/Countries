@@ -1,0 +1,62 @@
+<%- include('partials/header')  %>
+
+<section class="countries-container">
+    <div class="search-filter">
+        <div class="search-container">
+            <form action="/countries/name" method="GET" class="search-form">
+                <i class="fas fa-search"></i>
+                <input type="text" class="search" placeholder="search for a country..." name="query">
+                <input type="submit" value="query" hidden>
+            </form>
+        </div>
+        <div class="filter-container">
+            <div class="filter">
+                Filter by Region <i class="fas fa-chevron-down"></i>
+            </div>
+            <ul class="filter-dropdown">
+                <li class="region"><a href="/region/africa">Africa</a></li>
+                <li class="region"><a href="/region/americas">Americas</a></li>
+                <li class="region"><a href="/region/asia">Asia</a></li>
+                <li class="region"><a href="/region/europe">Europe</a></li>
+                <li class="region"><a href="/region/oceania">Oceania</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="countries-wrapper">
+        <%if(countries) {%>
+        <% countries.forEach(function(country){%>
+        <a href="/countries/<%= country.name.common %>">
+            <div class="country-card">
+                <img src="<%= country.flags.png %> " alt="country-flag">
+                <div class="country-info">
+                    <h3><%= country.name.common %> </h3>
+                    <p><span>Population:</span> <%= country.population && country.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") %> </p>
+                    <p><span>Region:</span><%= country.region %> </p>
+                    <p><span>Capital:</span> <%=country.capital%> </p>
+                </div>
+            </div>
+        </a>
+        <%}) %>
+        <%} %>
+
+    </div>
+    <div class="page-controls">
+        <% if(page_num > 1) {%>
+        <a href="/region/<%= name %>/<%= page_num - 1 %> " class="prev-page swiper-btn" role="button"><i
+                class="fas fa-arrow-circle-left prev-indicator"></i>prev</a>
+
+        <% }%>
+
+        <% if(page_num < totalPages) {%>
+        <a href="/region/<%= name %>/<%= page_num + 1 %> " class="next-page swiper-btn" role="button"
+            value="next-page">next<i class="fas fa-arrow-circle-right next-indicator"></i></a>
+
+
+        <% } %>
+
+    </div>
+</section>
+
+
+<%- include('partials/footer')  %>

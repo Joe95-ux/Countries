@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/907d5275a6.js" crossorigin="anonymous"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Countries | Rest Api</title>
+</head>
+
+<body>
+    <nav class="navigation">
+        <a class="logo" href="/">Where in the World?</a>
+        <div class="nav-items-container">
+            <div class="nav-items">
+                <div>
+                    <input type="checkbox" class="checkbox" id="checkbox">
+                    <label for="checkbox" class="label">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                        <div class="ball"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <section id="single-country" class="single-country height-adjust">
+        <div class="container-fluid">
+            <form action="/countries/<%= country.name %>" method="POST">
+                <button class="return-btn" type="submit"><i
+                        class="fas fa-arrow-circle-left prev-indicator"></i>Back</button>
+            </form>
+            <div class="country-container">
+                <%if(country) {%>
+                <div class="country-details">
+                    <div class="image"><img src="<%= country.flag %>" alt="country-flag"></div>
+
+                    <div class="country-info">
+                        <h3><%= country.name %> </h3>
+                        <div class="main-info">
+                            <div>
+                                <p><span>Native Name:</span><%= country.nativeName %> </p>
+                                <p><span>Population:</span> <%= population %> </p>
+                                <p><span>Region:</span><%= country.region %> </p>
+                                <p><span>Sub Region:</span> <%=country.subregion%> </p>
+                                <p><span>Capital:</span> <%=country.capital%> </p>
+                            </div>
+                            <div>
+                                <p><span>top level domain:</span><%=country.topLevelDomain%></p>
+                                <p><span>Currencies:</span> <%=country.currencies[0].name%> </p>
+                                <%if(languages){%>
+                                <p><span>languages:</span>
+                                    <%= languages %>
+                                </p>
+                                <%}%> 
+
+                            </div>
+                        </div>
+
+                        <div class="borders">
+                            <h3>Border Countries:</h3>
+                            <%if(country.borders){%>
+                                <div>
+                                    <% country.borders.forEach((border)=>{%>
+                                    <span><%= border %></span>
+                                    <%})%>
+                                </div>
+                                <%} %>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <%} %>
+                </div>
+            </div>
+    </section>
+
+
+
+    <footer class="country-footer">
+        <div>
+            <div class="copyright-container">
+                <span class="copyright"><i class="far fa-copyright"></i></span>
+                <a href="#">The Country Api</a>
+                <span>All rights reserved.</span>
+            </div>
+            <div class="important-links">
+                <a href="#">Main</a>
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">News Blog</a>
+            </div>
+            <div class="socials">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="/index.js"></script>
+</body>
+
+</html>
