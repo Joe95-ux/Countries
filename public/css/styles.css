@@ -218,13 +218,13 @@ a.logo:hover {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 4px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     cursor: default;
 }
 
 .filter i {
     margin-left: 1.8rem;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     cursor: pointer;
 }
 

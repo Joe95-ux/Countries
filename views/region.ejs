@@ -11,14 +11,12 @@
         </div>
         <div class="filter-container">
             <div class="filter">
-                Filter by Region <i class="fas fa-chevron-down"></i>
+                <%=name%><i class="fas fa-chevron-down"></i>
             </div>
             <ul class="filter-dropdown">
-                <li class="region"><a href="/region/africa">Africa</a></li>
-                <li class="region"><a href="/region/americas">Americas</a></li>
-                <li class="region"><a href="/region/asia">Asia</a></li>
-                <li class="region"><a href="/region/europe">Europe</a></li>
-                <li class="region"><a href="/region/oceania">Oceania</a></li>
+                <% regions.forEach(region =>{%>
+                    <li class="region"><a href="/region/<%= region %> "><%= region %> </a></li>
+                <% }) %> 
 
             </ul>
         </div>

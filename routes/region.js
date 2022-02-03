@@ -20,11 +20,13 @@ function getPagination(allCountries, len){
 }
 
 //country by region
+const allRegions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
 router.get('/:whatregion', async(req, res)=>{
     const pageSize = 20;
     let name = req.params.whatregion;
     const page_num = 1;
+    const regions = allRegions.filter(region=>region !== name);
     try{
         const response = await fetch('https://restcountries.com/v3.1/region/' + name);
         const allCountries = await response.json();
@@ -36,7 +38,8 @@ router.get('/:whatregion', async(req, res)=>{
             countries: countries,
             page_num:page_num,
             totalPages:pages,
-            name:name
+            name:name,
+            regions
         })
     }catch(e){
         console.log(e);
@@ -47,6 +50,7 @@ router.get('/:whatregion/:page', async(req, res)=>{
     const pageSize = 20;
     let name = req.params.whatregion;
     let page_num = parseInt(req.params.page);
+    const regions = allRegions.filter(region=>region !== name);
     try{
         const response = await fetch('https://restcountries.com/v3.1/region/' + name);
         const allCountries = await response.json();
@@ -58,7 +62,8 @@ router.get('/:whatregion/:page', async(req, res)=>{
             countries: countries,
             page_num:page_num,
             totalPages:pages,
-            name:name
+            name:name,
+            regions
         })
     }catch(e){
         console.log(e);
