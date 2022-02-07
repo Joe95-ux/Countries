@@ -31,6 +31,7 @@ function getPagination(allCountries, len){
     return result;
 
 }
+const allRegions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
 app.get('/countries', async(req, res)=>{
     const pageSize = 24;
@@ -45,7 +46,8 @@ app.get('/countries', async(req, res)=>{
         res.render('home', {
             countries: countries,
             page_num:page_num,
-            totalPages:pages
+            totalPages:pages,
+            regions:allRegions
         
         })
     }catch(e){
@@ -66,7 +68,8 @@ app.get('/:page', async(req, res)=>{
         res.render('home', {
             countries: countries,
             page_num:page_num,
-            totalPages:pages
+            totalPages:pages,
+            regions:allRegions
         })
     }catch(e){
         console.log(e);

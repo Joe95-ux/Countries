@@ -4,6 +4,10 @@ const _ = require("lodash");
 const fetch = require('node-fetch');
 const router = express.Router();
 
+
+
+const allRegions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
+
 function getPagination(allCountries, len){
     const result = [];
     let index = 0;
@@ -23,11 +27,12 @@ function getPagination(allCountries, len){
 //get country by name
 router.get('/name', async(req, res)=>{
     let query = _.toLower(req.query.query);
+    query = _.trimEnd(query);
     let name = encodeURIComponent(query);
     const pageSize = 20;
     let page_num = 1;
     try{
-        const response = await fetch('https://restcountries.com/v2/name/' + name);
+        const response = await fetch('https://restcountries.com/v2/name/' + name );
         const allCountries = await response.json();
         const pages = Math.ceil(allCountries.length / pageSize);
         const pagination = getPagination(allCountries, pageSize);
@@ -38,7 +43,8 @@ router.get('/name', async(req, res)=>{
             query : query,
             page_num:page_num,
             totalPages:pages,
-            name:name
+            name:name,
+            regions:allRegions
         
         })
     }catch(e){
@@ -65,7 +71,8 @@ router.get('/:name/:page', async(req, res)=>{
             query : query,
             page_num:page_num,
             totalPages:pages,
-            name:name
+            name:name,
+            region:allRegions
         })
     }catch(e){
         console.log(e);
